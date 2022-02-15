@@ -1,0 +1,8 @@
+[14-Nov-2021 21:01:17 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_header() in /home3/threadtheword/public_html/wp-content/themes/threadtheword/404.php:10
+Stack trace:
+#0 {main}
+  thrown in /home3/threadtheword/public_html/wp-content/themes/threadtheword/404.php on line 10
+[14-Dec-2021 15:22:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_header() in /home3/threadtheword/public_html/wp-content/themes/threadtheword/404.php:10
+Stack trace:
+#0 {main}
+  thrown in /home3/threadtheword/public_html/wp-content/themes/threadtheword/404.php on line 10
