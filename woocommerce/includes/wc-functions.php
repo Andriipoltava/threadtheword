@@ -194,74 +194,6 @@ function threadtheword_template_single_price()
     <?php
 }
 
-// Product Information under Product Gallery!
-add_action('woocommerce_before_single_product_summary', 'threadtheword_single_product_summary_description', 21);
-function threadtheword_single_product_summary_description()
-{
-//    $heading = apply_filters( 'woocommerce_product_description_heading', __( 'PRODUCT INFORMATION', 'woocommerce' ) );
-//
-//    $product_title 	= get_the_title();
-//    $product_url	= get_permalink();
-//    $product_img	= wp_get_attachment_url( get_post_thumbnail_id() );
-//
-//    // $insagram_url 	= 'https://www.instagram.com/sharer/sharer.php?u=' . $product_url;
-//    $facebook_url 	= 'https://www.facebook.com/sharer/sharer.php?u=' . $product_url;
-//    $twitter_url	= 'https://twitter.com/intent/tweet?status=' . rawurlencode( $product_title ) . '+' . $product_url;
-//    $pinterest_url	= 'https://pinterest.com/pin/create/bookmarklet/?media=' . $product_img . '&url=' . $product_url . '&is_video=false&description=' . rawurlencode( $product_title );
-//    $email_url		= 'mailto:?subject=' . rawurlencode( $product_title ) . '&body=' . $product_url;
-//
-//
-    ?>
-    <!--    <div class="product_desktop">-->
-    <!--        <div class="product_info">-->
-    <!--            --><?php //if ( $heading ) :
-    ?>
-    <!--                <h2 class="product_info-title">--><?php //echo esc_html( $heading );
-    ?><!--</h2>-->
-    <!--            --><?php //endif;
-    ?>
-    <!--            <div class="product_info-desc">-->
-    <!--                --><?php //the_content();
-    ?>
-    <!--            </div>-->
-    <!--        </div>-->
-    <!---->
-    <!--        <div class="share">-->
-    <!--            <div class="share_title">SHARE</div>-->
-    <!--            <ul class="share_list">-->
-    <!--                <li class="share_item">-->
-    <!--                    <a href="#sub-menus"><img src="--><?php //echo get_template_directory_uri();
-    ?><!--/assets/images/svg/icon-product-1.svg" alt=""></a>-->
-    <!--                    <ul class="sub-share_list">-->
-    <!--                        <li class="sub-share_item"><a href="--><?php //echo esc_url( $facebook_url );
-    ?><!--"><img src="--><?php //echo get_template_directory_uri();
-    ?><!--/assets/images/svg/icon-share-1.svg" alt=""></a></li>-->
-    <!--                        <li class="sub-share_item"><a href="--><?php //echo esc_url( $twitter_url );
-    ?><!--"><img src="--><?php //echo get_template_directory_uri();
-    ?><!--/assets/images/svg/icon-share-2.svg" alt=""></a></li>-->
-    <!--                        <li class="sub-share_item"><a href="--><?php //echo esc_url( $pinterest_url );
-    ?><!--"><img src="--><?php //echo get_template_directory_uri();
-    ?><!--/assets/images/svg/icon-share-3.svg" alt=""></a></li>-->
-    <!--                        <li class="sub-share_item"><a href="--><?php //echo esc_url( $email_url );
-    ?><!--"><img src="--><?php //echo get_template_directory_uri();
-    ?><!--/assets/images/svg/icon-share-4.svg" alt=""></a></li>-->
-    <!--                    </ul>-->
-    <!--                </li>-->
-    <!--                <li class="share_item">-->
-    <!--                    <a href="--><?php //the_field('footer_bottom_facebook_link', 'options');
-    ?><!--" target="_blank"><img src="--><?php //echo get_template_directory_uri();
-    ?><!--/assets/images/svg/icon-product-2.svg" alt=""></a>-->
-    <!--                </li>-->
-    <!--                <li class="share_item">-->
-    <!--                    <a href="--><?php //the_field('footer_bottom_instagram_link', 'options');
-    ?><!--" target="_blank"><img src="--><?php //echo get_template_directory_uri();
-    ?><!--/assets/images/svg/icon-product-3.svg" alt=""></a>-->
-    <!--                </li>-->
-    <!--            </ul>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <?php
-}
 
 add_action('woocommerce_after_single_product_summary', 'threadtheword_after_single_product_summary', 5);
 function threadtheword_after_single_product_summary()
@@ -441,6 +373,8 @@ function remove_featured_image($html, $attachment_id)
 
     global $post, $product;
 
+    if ($product->is_type('variable')) return $html;
+
     $featured_image = get_post_thumbnail_id($product->ID);
 
     if (has_term('giftcard', 'product_cat')) {
@@ -456,3 +390,56 @@ function remove_featured_image($html, $attachment_id)
 
 add_filter('woocommerce_single_product_image_thumbnail_html', 'remove_featured_image', 10, 2);
 
+
+function woocommerce_product_custom_fields()
+{
+    $args = array(
+        'id' => 'woocommerce_custom_fields',
+        'label' => __('Add Input Product  Fields'),
+    );
+    woocommerce_wp_text_input($args);
+}
+
+add_action('woocommerce_product_options_advanced', 'woocommerce_product_custom_fields');
+
+
+function save_woocommerce_product_custom_fields($post_id)
+{
+    $product = wc_get_product($post_id);
+    $custom_fields_woocommerce_title = isset($_POST['woocommerce_custom_fields']) ? $_POST['woocommerce_custom_fields'] : '';
+    $product->update_meta_data('woocommerce_custom_fields', sanitize_text_field($custom_fields_woocommerce_title));
+    $product->save();
+}
+
+add_action('woocommerce_process_product_meta', 'save_woocommerce_product_custom_fields');
+
+function woocommerce_custom_fields_display()
+{
+
+    global $post, $product;
+    if ($product->is_type('variable')) return '';
+
+
+    $product = wc_get_product($post->ID);
+    $custom_fields_woocommerce_title = $product->get_meta('woocommerce_custom_fields');
+    if ($custom_fields_woocommerce_title) {
+        printf(
+            '<div class="w-100"><label>%s </label><input type="text" id="woocommerce_product_custom_fields_title" name="woocommerce_product_custom_fields_title" value=""></div>',
+            esc_html($custom_fields_woocommerce_title)
+        );
+    }
+}
+
+add_action('woocommerce_before_add_to_cart_form', 'woocommerce_custom_fields_display');
+
+add_filter('woocommerce_shipping_package_name', function ($package_name, $i, $package) {
+    if ($package_name === 'Shipping')
+        $package_name = __('Shipping Methods');
+    return $package_name;
+}, 10, 3);
+if (class_exists('WC_Gateway_Afterpay')) {
+    $gateway = WC_Gateway_Afterpay::getInstance();
+    remove_action('woocommerce_cart_totals_after_order_total', array($gateway, 'render_cart_page_elements'), 10, 0);
+    add_action('woocommerce_proceed_to_checkout', array($gateway, 'render_cart_page_elements'), 20);
+
+}

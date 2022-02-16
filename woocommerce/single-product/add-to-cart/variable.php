@@ -36,6 +36,22 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
         <?php else : ?>
             <table class="variations" cellspacing="0">
                 <tbody>
+
+                <?php     $custom_fields_woocommerce_title = $product->get_meta('woocommerce_custom_fields');
+                if ($custom_fields_woocommerce_title) {
+                    ?>
+                    <tr class="custom_name">
+                        <td class="label"><label
+                                    for="woocommerce_product_custom_fields_title"><?php echo $custom_fields_woocommerce_title; // WPCS: XSS ok. ?></label>
+                        </td>
+                        <td class="value">
+                            <input type="text" id="woocommerce_product_custom_fields_title" name="woocommerce_product_custom_fields_title" value="">
+                        </td>
+                    </tr>
+                    <?php
+
+                } ?>
+
                 <?php foreach ($attributes as $attribute_name => $options) : ?>
                     <tr class="<?php echo $attribute_name ?>">
                         <td class="label"><label
@@ -58,7 +74,7 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
                 </tbody>
             </table>
 
-            <div class="single_variation_wrap">
+            <div class="single_variation_wrap w-100">
                 <?php
                 /**
                  * Hook: woocommerce_before_single_variation.

@@ -85,6 +85,9 @@ body {
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+    --form--border-width: 2px;
+    --form--border-color: #7f7f7f;
+    --global--color-border: #7f7f7f;
 }
 
 ul,
@@ -2919,6 +2922,11 @@ table.variations {
     margin-bottom: 15px;
 }
 
+.variations .custom_name .label label, .variations .custom_name .value input {
+    margin-bottom: 15px;
+    display: block;
+}
+
 .variations .pa_letter .label {
     font-size: 18px;
     font-weight: 500;
@@ -3655,14 +3663,17 @@ a.reset_variations {
     -webkit-transform: translateY(2px);
     -ms-transform: translateY(2px);
     transform: translateY(2px);
+    background-color: #e5e5e5;
 }
 
 .woocommerce-checkout-review-order-table input[type="radio"].shipping_method:checked + label::before {
     background: var(--global--color-border);
+    background-color: #7f7f7f;
 }
 
 .is-dark-theme .woocommerce-checkout-review-order-table input[type="radio"].shipping_method:checked + label::before {
     background: var(--global--color-background);
+    background-color: #7f7f7f;
 }
 
 .woocommerce-checkout-review-order-table td {
@@ -3823,7 +3834,7 @@ a.reset_variations {
 .wc_payment_method input[type="radio"] + label::before {
     content: "";
     display: inline-block;
-    /*width: 14px;*/
+    width: 14px;
     height: 14px;
     border: var(--form--border-width) solid var(--form--border-color);
     background: var(--global--color-white);
@@ -3833,6 +3844,8 @@ a.reset_variations {
     -webkit-transform: translateY(2px);
     -ms-transform: translateY(2px);
     transform: translateY(2px);
+    background-color: #e5e5e5;
+
 }
 
 .wc_payment_method input[type="radio"]:checked + label::before {
@@ -3845,6 +3858,14 @@ a.reset_variations {
 
 .wc_payment_methods .payment_box p {
     font-family: "Montserrat";
+}
+
+.woocommerce-checkout-payment h3 {
+    margin-top: 2rem;
+}
+
+.wc_payment_methods.payment_methods.methods {
+    margin-top: 1rem !important;
 }
 
 .account-payment-methods-table {
@@ -6284,4 +6305,11 @@ a.reset_variations {
     height: 100%;
     width: 100%;
     position: absolute;
+}
+
+.cart_item td.product-total:last-child,
+.shipping td:last-child,
+.cart-subtotal td:last-child,
+.order-total td:last-child {
+    text-align: end;
 }
