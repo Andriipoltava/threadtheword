@@ -1,8 +1,8 @@
 jQuery(function($){
     $(document).ready(function() {
-        var variable_price_placement =  $('.woocommerce-variation-add-to-cart .price');
-        variable_price_placement.addClass("variation-price");
-      $('.variations_form.cart').before(variable_price_placement);
+      //   var variable_price_placement =  $('.woocommerce-variation-add-to-cart .price');
+      //   variable_price_placement.addClass("variation-price");
+      // $('.variations_form.cart').before(variable_price_placement);
     });
 
     // document.addEventListener("DOMContentLoaded", function() {
