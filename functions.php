@@ -389,8 +389,3 @@ function order_send_com($order)
     ));
     return $result;
 }
-
-remove_action('woocommerce_single_variation','woocommerce_single_variation');
-
-add_action('woocommerce_after_add_to_cart_quantity','woocommerce_single_variation');
-

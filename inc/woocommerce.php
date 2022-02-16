@@ -152,3 +152,10 @@ if ( ! function_exists( 'threadtheword_woocommerce_wrapper_after' ) ) {
 	}
 }
 add_action( 'woocommerce_after_main_content', 'threadtheword_woocommerce_wrapper_after' );
+
+
+
+remove_action('woocommerce_single_variation','woocommerce_single_variation');
+
+add_action('woocommerce_after_add_to_cart_quantity','woocommerce_single_variation');
+
