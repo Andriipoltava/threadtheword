@@ -16,14 +16,19 @@ get_header();
 ?>
 
 	<section class="page-header">
-		<div class="container">
+		<div class="container <?php echo !is_user_logged_in()&&is_account_page()?'no_login':''?>">
 			<?php
 			$args = array(
 				'delimiter' => ' > ' // меняем разделитель
 			);
 			woocommerce_breadcrumb( $args );
 
-			the_title( '<h1 class="page-header__title">', '</h1>' );
+            if(!is_user_logged_in()&&is_account_page()){
+                echo '<h1 class="page-header__title ">Login</h1>';
+            }else{
+                the_title( '<h1 class="page-header__title">', '</h1>' );
+
+            }
 			?>
 		</div>
 	</section>
