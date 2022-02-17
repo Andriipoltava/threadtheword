@@ -443,3 +443,33 @@ if (class_exists('WC_Gateway_Afterpay')) {
     add_action('woocommerce_proceed_to_checkout', array($gateway, 'render_cart_page_elements'), 20);
 
 }
+//remove_action('woocommerce_after_checkout_shipping_form');
+add_filter('woocommerce_form_field', function ($field, $key, $args, $value) {
+    if ($key == 'billing_country' || $key == 'billing_address_2') return '';
+    return $field;
+}, 10, 4);
+
+
+add_filter('woocommerce_form_field_args', function (array $args, string $key) {
+
+    $args['placeholder'] = $args['label'];
+    if ($key !== 'order_send_as_a_gift_tick_')
+        $args['label'] = '';
+    if($key==='billing_state'){
+//        var_dump($args);
+    }
+    return $args;
+}, 10, 2);
+
+function woo_override_checkout_fields_billing( $fields ) {
+
+    $fields['billing']['billing_country'] = array(
+        'type'      => 'select',
+        'label'     => __('My New Country List', 'woocommerce'),
+    );
+//    var_dump(    $fields['billing']['billing_country']);
+
+    return $fields;
+}
+add_filter( 'woocommerce_checkout_fields' , 'woo_override_checkout_fields_billing' );
+

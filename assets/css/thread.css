@@ -588,7 +588,9 @@ a.remove:hover {
     margin-bottom: 6px;
     text-align: center;
 }
-
+.single_add_to_cart_button{
+    flex: 0 0 100% !important;
+}
 .slider-title-third {
     font-size: 30px;
     padding: 5px 15px;
@@ -597,6 +599,7 @@ a.remove:hover {
     font-weight: 400;
     background: #000;
     display: inline-block;
+
 }
 
 @media (max-width: 1199px) {

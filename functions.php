@@ -275,28 +275,19 @@ function wc_checkout_description($other_data, $cart_item)
 
 
 add_action('wp_footer', function () {
-    // Проверяем, что это страница корзины.
     if (!is_cart()) {
         return;
     }
-
     ?>
     <script>
         jQuery(function ($) {
             var delay;
-
-            // Вешаем "слушателя".
             $('.woocommerce').on('change', '.qty', function () {
-
                 if (undefined !== delay) {
                     clearTimeout(delay);
                 }
-
-                // Делаем задержку в полсекунды, чтобы не генерить
-                // лишние запросы на сервер.
                 delay = setTimeout(
                     function () {
-                        // Кликаем на кпоку обновления корзины.
                         $('[name="update_cart"]').trigger('click');
                     },
                     500
@@ -312,7 +303,6 @@ add_action('wp_footer', function () {
         });
     </script>
     <style>
-        /* Прячем кнопку */
         .woocommerce [name="update_cart"] {
             display: none;
         }
@@ -321,19 +311,7 @@ add_action('wp_footer', function () {
 }
 );
 
-// Add more info button to the product
-//add_action('woocommerce_after_shop_loop_item', 'add_a_custom_button', 5 );
-//function add_a_custom_button() {
-//	global $product;
-//
-//	// Not for variable and grouped products that doesn't have an "add to cart" button
-//	if( $product->is_type('variable') || $product->is_type('grouped') ) return;
-//
-//	// Output the custom button linked to the product
-//	echo '<div class="product-more-info-btn">
-//        <a class="button custom-button" href="' . esc_attr( $product->get_permalink() ) . '">' . __('more info') . '</a>
-//    </div>';
-//}
+
 
 remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
 function change_product_title()
