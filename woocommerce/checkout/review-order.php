@@ -20,8 +20,8 @@ defined( 'ABSPATH' ) || exit;
 <table class="shop_table woocommerce-checkout-review-order-table">
 	<thead>
 		<tr>
-			<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-			<th class="product-total"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
+			<th class="product-name pl-0" colspan="2" align="left"><h3><?php esc_html_e( 'Order Summary', 'woocommerce' ); ?></h3></th>
+
 		</tr>
 	</thead>
 	<tbody>
@@ -56,6 +56,11 @@ defined( 'ABSPATH' ) || exit;
 			<th><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
 			<td><?php wc_cart_totals_subtotal_html(); ?></td>
 		</tr>
+        <tr>
+            <td colspan="2">
+                <?php do_action( 'woocommerce_review_order_pre_before_shipping' ); ?>
+            </td>
+        </tr>
 
 		<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
 			<tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
@@ -63,6 +68,8 @@ defined( 'ABSPATH' ) || exit;
 				<td><?php wc_cart_totals_coupon_html( $coupon ); ?></td>
 			</tr>
 		<?php endforeach; ?>
+
+
 
 		<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
 

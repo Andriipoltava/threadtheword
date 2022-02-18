@@ -129,9 +129,9 @@
     height: 100% !important;
 }
 
-.product-name {
-    padding-left: 15px;
-}
+/*.product-name {*/
+/*    padding-left: 15px;*/
+/*}*/
 
 .qib-text {
     display: none;
@@ -527,10 +527,11 @@ a.remove:hover {
     margin-top: 0 !important;
 }
 
-.woocommerce-shipping-totals.shipping .shipping_method_name {
-    font-size: 1.17em;
+#order_review
+#shipping_method li label{
+    display: flex;
+    justify-content: space-between;
 }
-
 .variation dt {
     display: none;
 }
@@ -588,9 +589,11 @@ a.remove:hover {
     margin-bottom: 6px;
     text-align: center;
 }
-.single_add_to_cart_button{
+
+.single_add_to_cart_button {
     flex: 0 0 100% !important;
 }
+
 .slider-title-third {
     font-size: 30px;
     padding: 5px 15px;
