@@ -459,7 +459,9 @@ add_filter('woocommerce_form_field_args', function (array $args, string $key) {
     if ($key === 'order_comments') {
         $args['placeholder'] = __('Notes about order or special delivery instructions');
     }
-
+    if ($key === 'billing_email') {
+        $args['placeholder'] = __('Email');
+    }
     if ($key === 'billing_state' || $key === 'billing_city') {
         if (false !== $key = array_search('w-66', $args['class'])) {
             unset($args['class'][$key]);
