@@ -333,7 +333,6 @@ function threadtheword_product_short_description($content)
 }
 
 
-
 add_action('woocommerce_product_options_general_product_data', 'threadtheword_woocommerce_add_custom_fields');
 function threadtheword_woocommerce_add_custom_fields()
 {
@@ -451,22 +450,65 @@ add_filter('woocommerce_form_field', function ($field, $key, $args, $value) {
 
 add_filter('woocommerce_form_field_args', function (array $args, string $key) {
 
-    $args['placeholder'] = $args['label'];
-    if ($key !== 'order_send_as_a_gift_tick_')
+    if ($key !== 'order_enter_a_message')
+        $args['placeholder'] = $args['label'];
+
+    if ($key === 'billing_company') {
+        $args['placeholder'] = __("Company");
+    }
+    if ($key === 'order_comments') {
+        $args['placeholder'] = __('Notes about order or special delivery instructions');
+    }
+
+    if ($key === 'billing_state' || $key === 'billing_city') {
+        if (false !== $key = array_search('w-66', $args['class'])) {
+            unset($args['class'][$key]);
+        }
+        $args['class'][] = 'form-row-first';
+    }
+
+    if ($key === 'billing_phone' || $key === 'billing_postcode') {
+        if (false !== $key = array_search('w-33', $args['class']))
+            unset($args['class'][$key]);
+        if (false !== $key = array_search('pl-5', $args['class']))
+            unset($args['class'][$key]);
+
+        $args['class'][] = 'form-row-last';
+    }
+
+    if ($key === 'order_comments' || $key === 'order_enter_a_message') {
+        $args['custom_attributes']['rows'] = 5;
+
+    }
+    if ($key !== 'order_send_as_a_gift_tick_') {
         $args['label'] = '';
+    }
+    if ($key === 'order_enter_a_message') {
+        $args['label'] = __('Enter a message you would like us to include in the order. (no invoice or receipt will be included)');
+    }
+
+
+
     return $args;
 }, 10, 2);
 
-function woo_override_checkout_fields_billing( $fields ) {
+function woo_override_checkout_fields_billing($fields)
+{
 
     $fields['billing']['billing_country'] = array(
-        'type'      => 'select',
-        'label'     => __('My New Country List', 'woocommerce'),
+        'type' => 'select',
+        'label' => __('My New Country List', 'woocommerce'),
     );
+
     return $fields;
 }
-add_filter( 'woocommerce_checkout_fields' , 'woo_override_checkout_fields_billing' );
 
-remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10 );
+add_filter('woocommerce_checkout_fields', 'woo_override_checkout_fields_billing');
 
-add_action( 'woocommerce_review_order_pre_before_shipping', 'woocommerce_checkout_coupon_form' );
+remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
+
+add_action('woocommerce_review_order_pre_before_shipping', 'woocommerce_checkout_coupon_form');
+
+add_filter('woocommerce_order_button_text', function ($title) {
+    return __('Complete secure payment');
+});

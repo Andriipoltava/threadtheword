@@ -74,14 +74,14 @@ unset($fields['billing_email'])
                 <input type="checkbox" class="input-checkbox input-inspirecheckbox"
                        name="billing_subscribe_to_our_newsletter" id="billing_subscribe_to_our_newsletter" value="Yes"
                        checked="" data-qa-id="Subscribe to our newsletter receive awesome offers and news!">
-                Subscribe to our newsletter receive awesome offers and news! </label>
+                <?php _e('Keep me updated on news and exclusive offers'); ?> </label>
         </p>
     </div>
 
 
     <?php if (wc_ship_to_billing_address_only() && WC()->cart->needs_shipping()) : ?>
 
-        <h3><?php esc_html_e('Billing &amp; Shipping', 'woocommerce'); ?></h3>
+        <h3><?php esc_html_e('Shipping Address', 'woocommerce'); ?></h3>
 
     <?php else : ?>
 

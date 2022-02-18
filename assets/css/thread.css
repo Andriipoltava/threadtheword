@@ -30,6 +30,10 @@
     margin-top: 15px !important;
 }
 
+.p-0 {
+    padding: 0 !important;
+}
+
 .content-justify-between {
     justify-content: space-between;
 }
@@ -402,25 +406,22 @@ a.remove:hover {
 }
 
 .woocommerce-checkout .select2-container .select2-selection--single {
-    height: 48px;
+    height: 38px;
     border: 1px solid #707070;
     border-radius: 0;
 }
 
+.woocommerce form .form-row .input-text::placeholder, .woocommerce-page form .form-row .input-text::placeholder{
+    color: #000!important;
+    text-transform: uppercase;
+}
 .woocommerce form .form-row .input-text, .woocommerce-page form .form-row .input-text {
-    font-family: 'Courier';
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 17px;
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #707070;
-    outline: 0;
-    margin-bottom: 10px;
+
+
 }
 
 .woocommerce-privacy-policy-text p {
-    font-size: 14px !important;
+    /*font-size: 14px !important;*/
     line-height: 17px;
 }
 
@@ -437,7 +438,7 @@ a.remove:hover {
     outline: 0;
     width: 300px;
     height: 35px;
-    padding-left: 12px;
+    padding-left: 10px;
     font-size: 14px;
     font-weight: 400;
     text-transform: uppercase;
@@ -528,10 +529,12 @@ a.remove:hover {
 }
 
 #order_review
-#shipping_method li label{
+#shipping_method li label {
     display: flex;
-    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 16px;
 }
+
 .variation dt {
     display: none;
 }
@@ -545,6 +548,7 @@ a.remove:hover {
     flex-direction: row;
     align-items: center;
     margin: auto 0;
+    font-size: 16px;
 }
 
 .footer-payments-logo {
@@ -557,6 +561,10 @@ a.remove:hover {
         padding-left: 0;
         margin-top: 15px;
     }
+}
+
+.cart-subtotal th {
+    font-size: 16px;
 }
 
 .container-slider {
@@ -576,6 +584,7 @@ a.remove:hover {
     top: 15%;
     text-align: right;
     z-index: 99;
+
 }
 
 .slider-title-first,
