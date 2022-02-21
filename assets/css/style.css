@@ -6445,3 +6445,6 @@ a.reset_variations {
 .woocommerce-NoticeGroup-checkout{
     width: 100%;
 }
+.product-type-simple .single_add_to_cart_button {
+    margin-top: 15px!important;
+}

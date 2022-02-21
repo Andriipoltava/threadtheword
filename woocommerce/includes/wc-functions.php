@@ -490,7 +490,6 @@ add_filter('woocommerce_form_field_args', function (array $args, string $key) {
     }
 
 
-
     return $args;
 }, 10, 2);
 
@@ -513,4 +512,25 @@ add_action('woocommerce_review_order_pre_before_shipping', 'woocommerce_checkout
 
 add_filter('woocommerce_order_button_text', function ($title) {
     return __('Complete secure payment');
+});
+
+
+add_filter('wp_footer', function () {
+
+    global $product;
+    if ($product) {
+        $attributes = $product->get_attributes();
+        $personalis = !empty($attributes['cc_editor']) && !empty($attributes['cc_editor_config']);
+        if ($personalis)
+            echo
+            '
+				<script>
+				jQuery(".personalise_add_to_cart").on("click",function(event){
+    event.preventDefault();
+    if( jQuery("#rnoc-add-to-cart-add-on"))
+        jQuery("#rnoc-add-to-cart-add-on").show();
+
+})
+				</script>';
+    }
 });
