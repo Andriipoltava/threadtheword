@@ -1022,3 +1022,7 @@ a.remove:hover {
     background-color: white;
 }
 
+.single-product .variations_form.cart .variations tr{
+    vertical-align: text-top;
+}
+
