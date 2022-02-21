@@ -525,10 +525,10 @@ add_filter('wp_footer', function () {
             echo
             '
 				<script>
-				jQuery(".personalise_add_to_cart").on("click",function(event){
+				jQuery(".personalise_add_to_cart:not(.disabled)").on("click",function(event){
     event.preventDefault();
-    if( jQuery("#rnoc-add-to-cart-add-on"))
-        jQuery("#rnoc-add-to-cart-add-on").show();
+    if( jQuery("#rnoc-add-to-cart-add-on")&&!jQuery(this).hasClass("disabled"))
+      jQuery("#rnoc-add-to-cart-add-on").show();
 
 })
 				</script>';
