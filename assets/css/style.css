@@ -163,6 +163,9 @@ html {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
 }
+select{
+    -webkit-appearance: menulist;
+}
 
 .container,
 .container-fluid,
@@ -2914,13 +2917,14 @@ table.variations {
 
 
 
-.variations .pa_letter .label, .variations .pa_letter .value select {
-    margin-bottom: 15px;
+.variations  .label, .variations  .value {
+    padding: 15px 0;
 }
 
 .variations .custom_name .label label, .variations .custom_name .value input {
-    margin-bottom: 15px;
+
     display: block;
+    color: black;
 }
 
 table.variations  .label {
@@ -2936,7 +2940,14 @@ table.variations select {
     margin-right: 0.5rem;
     margin-left: 0.5rem;
     height: 29px;
+    min-height: 29px;
+    border: 1px solid #000;
     width: 100%;
+    max-width: 260px;
+    border-radius: 0;
+    color: black;
+    background: transparent;
+    padding: 0 10px;
 }
 
 a.reset_variations {
@@ -3914,8 +3925,9 @@ a.reset_variations {
 }
 
 #customer_details label input[type='checkbox']:before {
-    left: -2px;
-    top: -2px;
+    left:0;
+    top: 0;
+    position: absolute;
 }
 
 #customer_details label input[type='checkbox']:before,
@@ -4185,7 +4197,11 @@ a.reset_variations {
     margin-left: auto;
     font-size: 16px;
 }
-
+.single-product .woocommerce-Price-amount.amount {
+    margin-left: auto;
+    font-size: 20px;
+    font-weight: 500;
+}
 .wc_payment_methods.payment_methods.methods li > div:last-child {
     margin-left: 30px;
     max-width: calc(100% - 30px);

@@ -29,10 +29,10 @@ get_header( 'shop' );
 do_action( 'woocommerce_before_main_content' );
 
 ?>
+<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+
 <header class="woocommerce-products-header">
-	<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
 		<h1 class="page-header__title woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
-	<?php endif; ?>
 
 	<?php
 	/**
@@ -44,6 +44,8 @@ do_action( 'woocommerce_before_main_content' );
 	do_action( 'woocommerce_archive_description' );
 	?>
 </header>
+<?php endif; ?>
+
 <?php
 if ( woocommerce_product_loop() ) {
 
@@ -155,6 +157,7 @@ if ( woocommerce_product_loop() ) {
 		 */
 		do_action( 'woocommerce_after_shop_loop' );
 } else {
+
 		do_action( 'woocommerce_before_shop_loop' );
 
 		if ( wc_get_loop_prop( 'total' ) ) {

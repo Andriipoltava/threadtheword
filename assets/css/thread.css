@@ -1022,7 +1022,10 @@ a.remove:hover {
     background-color: white;
 }
 
-.single-product .variations_form.cart .variations tr{
+.single-product .variations tr {
     vertical-align: text-top;
+}
+.single-product .variations tr td.label{
+    display: block;
 }
 

@@ -443,7 +443,7 @@ if (class_exists('WC_Gateway_Afterpay')) {
 }
 
 add_filter('woocommerce_form_field', function ($field, $key, $args, $value) {
-    if ($key == 'billing_country' || $key == 'billing_address_2') return '';
+    if ( $key == 'billing_address_2') return '';
     return $field;
 }, 10, 4);
 
@@ -495,11 +495,11 @@ add_filter('woocommerce_form_field_args', function (array $args, string $key) {
 
 function woo_override_checkout_fields_billing($fields)
 {
-
-    $fields['billing']['billing_country'] = array(
-        'type' => 'select',
-        'label' => __('My New Country List', 'woocommerce'),
-    );
+//
+//    $fields['billing']['billing_country'] = array(
+//        'type' => 'select',
+//        'label' => __('My New Country List', 'woocommerce'),
+//    );
 
     return $fields;
 }
