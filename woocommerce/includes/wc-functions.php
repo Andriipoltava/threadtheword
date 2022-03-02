@@ -443,7 +443,7 @@ if (class_exists('WC_Gateway_Afterpay')) {
 }
 
 add_filter('woocommerce_form_field', function ($field, $key, $args, $value) {
-    if ( $key == 'billing_address_2') return '';
+    if ($key == 'billing_address_2') return '';
     return $field;
 }, 10, 4);
 
@@ -515,13 +515,15 @@ add_filter('woocommerce_order_button_text', function ($title) {
 });
 
 
+
 add_filter('wp_footer', function () {
+
 
     global $product;
     if ($product) {
         $attributes = $product->get_attributes();
         $personalis = !empty($attributes['cc_editor']) && !empty($attributes['cc_editor_config']);
-        if ($personalis)
+        if ($personalis) {
             echo
             '
 				<script>
@@ -532,5 +534,17 @@ add_filter('wp_footer', function () {
 
 })
 				</script>';
+        }
+    }
+});
+
+add_action('wp_enqueue_scripts',function (){
+    global $product;
+    if ($product) {
+        $attributes = $product->get_attributes();
+        $personalis = !empty($attributes['cc_editor']) && !empty($attributes['cc_editor_config']);
+        if (!$personalis) {
+            wp_enqueue_script('rnoc-add-to-cart', get_template_directory_uri() . '/assets/js/test.js', array(), _S_VERSION, true);
+        }
     }
 });

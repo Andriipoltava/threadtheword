@@ -120,6 +120,17 @@
 .woocommerce-cart-form .product-thumbnail {
     height: 150px;
     width: 150px;
+    min-width: 150px;
+    margin-right: 15px;
+}
+
+@media screen and (max-width: 567px) {
+    .woocommerce-cart-form .product-thumbnail {
+        height: 75px;
+        width: 75px;
+        min-width: 75px;
+        margin-right: 15px;
+    }
 }
 
 .woocommerce-cart-form .product-thumbnail img {
@@ -320,7 +331,7 @@ a.remove:hover {
     display: none;
 }
 
-.au-personalize {
+.au-personalize, .archive .add_to_cart_button {
     display: block;
     text-align: center;
     background: #b87762;
@@ -329,7 +340,7 @@ a.remove:hover {
     text-transform: uppercase;
 }
 
-.au-personalize:hover {
+.au-personalize:hover, .archive .add_to_cart_button:hover {
     color: #fff;
 }
 
@@ -411,10 +422,11 @@ a.remove:hover {
     border-radius: 0;
 }
 
-.woocommerce form .form-row .input-text::placeholder, .woocommerce-page form .form-row .input-text::placeholder{
-    color: #000!important;
+.woocommerce form .form-row .input-text::placeholder, .woocommerce-page form .form-row .input-text::placeholder {
+    color: #000 !important;
     text-transform: uppercase;
 }
+
 .woocommerce form .form-row .input-text, .woocommerce-page form .form-row .input-text {
 
 
@@ -533,6 +545,7 @@ a.remove:hover {
     display: flex;
     margin-top: 10px;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .variation dt {
@@ -1025,7 +1038,44 @@ a.remove:hover {
 .single-product .variations tr {
     vertical-align: text-top;
 }
-.single-product .variations tr td.label{
+
+.single-product .variations tr td.label {
     display: block;
 }
 
+/*.page-template-cart .order-total .woocommerce-Price-amount.amount {*/
+/*    font-size: 22px !important;*/
+/*}*/
+
+.page-template-cart #shipping_method > li {
+    margin-bottom: 10px!important;
+}
+
+
+.page-template-cart .order-total {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+
+}
+
+.page-template-cart .cart_totals .shipping_method_name{
+    margin-top: 10px;
+}
+.page-template-cart .order-total > div {
+    font-size: 16px;
+    margin-top: 0!important;
+}
+
+#customer_details label input[type='checkbox']{
+    -webkit-appearance: none!important;
+    -moz-appearance: none!important;
+    appearance: none!important;
+    outline: none!important;
+    box-shadow: none !important;
+    border: none!important;
+    background: #fff!important;
+}
